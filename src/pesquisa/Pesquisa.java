@@ -7,8 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
-import classes.Moeda;
-
 /**
  * Classe responsável pelas pesquisas na API e retorno em formato JSON
  * @author Felipe
@@ -48,6 +46,8 @@ public class Pesquisa {
 		}
 		return "";
 	}
+	
+	/** Método que converte um valor passado como parâmetro de uma moeda para outra */
 	public String converter(String moedaBase, String moedaAlvo, double valor) {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create("https://v6.exchangerate-api.com/v6/d89ee5ac23bc3ab861b97c2b/pair/" + moedaBase + "/" + moedaAlvo + "/" + valor))
