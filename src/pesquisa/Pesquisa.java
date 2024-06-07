@@ -6,19 +6,60 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import com.google.gson.Gson;
 
 import classes.Moeda;
 
+/**
+ * Classe responsável pelas pesquisas na API e retorno em formato JSON
+ * @author Felipe
+ */
+
 public class Pesquisa {
 
-	public String buscarCotacao(String moeda) throws IOException, InterruptedException {
+	/** Método que busca a cotação de todas as moedas suportadas, com base no dólar americano */
+	public String buscarCotacao() {
 		HttpRequest request = HttpRequest.newBuilder()
 		        .uri(URI.create("https://v6.exchangerate-api.com/v6/d89ee5ac23bc3ab861b97c2b/latest/USD"))
 		        .build();
-		HttpResponse<String> response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
-		
-		return response.body();
+		HttpResponse<String> response;
+		try {
+			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
+			return response.body();
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 		//return new Gson().fromJson(response.body(), Moeda.class);
+	}
+	
+	/** Método que busca todas as moedas suportadas */
+	public String buscarMoedas() {
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create("https://v6.exchangerate-api.com/v6/d89ee5ac23bc3ab861b97c2b/codes"))
+				.build();
+		HttpResponse<String> response;
+		try {
+			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
+			return response.body();
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	public String converter(String moedaBase, String moedaAlvo, double valor) {
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create("https://v6.exchangerate-api.com/v6/d89ee5ac23bc3ab861b97c2b/pair/" + moedaBase + "/" + moedaAlvo + "/" + valor))
+				.build();
+		HttpResponse<String> response;
+		try {
+			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
+			return response.body();
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

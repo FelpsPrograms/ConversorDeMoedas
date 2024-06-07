@@ -1,9 +1,5 @@
 package main;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,12 +12,8 @@ public class Main {
 				.create();
 		
 		Pesquisa pesquisa = new Pesquisa();
-		try {
-			System.out.println(gson.toJson(pesquisa.buscarCotacao("USD")));
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		System.out.println(gson.toJson(pesquisa.buscarCotacao()));
+		System.out.println(gson.toJson(pesquisa.buscarMoedas()));
+		System.out.println(gson.toJson(pesquisa.converter("BRL", "IDR", 100)));
 	}
-	
 }
