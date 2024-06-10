@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.google.gson.JsonSyntaxException;
+
+import classes.Moeda;
+import classes.ValorConvertido;
 import pesquisa.PesquisaJsonParser;
 
 import java.awt.Toolkit;
@@ -17,6 +21,7 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTable;
@@ -48,6 +53,8 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		PesquisaJsonParser pesquisa = new PesquisaJsonParser();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\conversor_icone.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,9 +70,15 @@ public class TelaPrincipal extends JFrame {
 		lblTitulo.setBounds(10, 10, 416, 13);
 		contentPane.add(lblTitulo);
 		
-		JComboBox<String> listaMoedaBase = new JComboBox<>();
+		JComboBox<Moeda> listaMoedaBase = new JComboBox<>();
 		listaMoedaBase.setBounds(10, 50, 150, 21);
 		contentPane.add(listaMoedaBase);
+		
+		ArrayList<Moeda> moedas = pesquisa.buscarMoedas();
+		
+		/*for (Moeda moeda : moedas) {
+			listaMoedaBase.add(Component. moeda);
+		}*/
 		
 		JLabel lblConverterPara = new JLabel("converter para");
 		lblConverterPara.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,10 +109,20 @@ public class TelaPrincipal extends JFrame {
 		JButton btnConverter = new JButton("Converter");
 		btnConverter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PesquisaJsonParser pesquisa = new PesquisaJsonParser();
-				pesquisa.jsonParserConverter("BRL", "IDR", 100000);
-				DefaultTableModel modelo = (DefaultTableModel) tbConversao.getModel();
-				//modelo.addRow();
+				try {
+					Double valor = Double.parseDouble(txtValor.getText());
+					DefaultTableModel modelo = (DefaultTableModel) tbConversao.getModel();
+					ValorConvertido valorConvertido = pesquisa.converter("IDR", "BRL", valor);
+					modelo.setRowCount(0);
+					modelo.addRow(new Object[] {valorConvertido.baseCode(), valorConvertido.targetCode()});
+					modelo.addRow(new Object[] {1, valorConvertido.conversionRate()});
+					modelo.addRow(new Object[] {valor, valorConvertido.conversionResult()});
+					tbConversao.setModel(modelo);
+				} catch (NumberFormatException error) {
+					JOptionPane.showMessageDialog(null, "Campo \"Valor a converter\" deve ser um número decimal.", "Erro!", 2);
+				} catch (JsonSyntaxException error) {
+					JOptionPane.showMessageDialog(null, "Valor a ser convertido é muito extenso.", "Erro!", 2);
+				}
 			}
 		});
 		btnConverter.setBounds(170, 103, 97, 21);

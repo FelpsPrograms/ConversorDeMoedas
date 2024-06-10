@@ -7,6 +7,7 @@ public class Main {
 		
 		PesquisaJsonParser pesquisa = new PesquisaJsonParser();
 		
-		System.out.println(pesquisa.jsonParserConverter("BRL", "IDR", 1000000));
+		System.out.println(pesquisa.buscarMoedas());
+		
 	}
 }
