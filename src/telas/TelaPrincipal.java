@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 
 public class TelaPrincipal extends JFrame {
 
@@ -59,7 +60,7 @@ public class TelaPrincipal extends JFrame {
 	public TelaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\conversor_icone.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 425);
+		setBounds(100, 100, 450, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -134,7 +135,7 @@ public class TelaPrincipal extends JFrame {
 				}
 			}
 		});
-		btnConverter.setBounds(170, 103, 97, 21);
+		btnConverter.setBounds(170, 103, 100, 21);
 		contentPane.add(btnConverter);
 		
 		JLabel lblValor = new JLabel("Valor a converter:");
@@ -143,7 +144,7 @@ public class TelaPrincipal extends JFrame {
 		lblValor.setBounds(10, 80, 205, 13);
 		contentPane.add(lblValor);
 		
-		JLabel lblTbCotacao = new JLabel("Cotação das moedas baseadas no dólar americano");
+		JLabel lblTbCotacao = new JLabel("Cotação das moedas baseada no dólar americano");
 		lblTbCotacao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTbCotacao.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblTbCotacao.setBounds(10, 230, 416, 21);
@@ -164,6 +165,22 @@ public class TelaPrincipal extends JFrame {
 		scrollPane.setBounds(10, 261, 416, 100);
 		contentPane.add(scrollPane);
 		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaInicial telaInicial = new TelaInicial();
+				telaInicial.setVisible(true);
+				dispose();
+			}
+		});
+		btnVoltar.setBounds(10, 382, 100, 21);
+		contentPane.add(btnVoltar);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\voltar_icone.png"));
+		lblNewLabel.setBounds(120, 382, 21, 21);
+		contentPane.add(lblNewLabel);
+		
 		atualizarTabelaCotacao();
 	}
 	
@@ -174,6 +191,5 @@ public class TelaPrincipal extends JFrame {
 			modelo.addRow(new Object[] {cotacao.abreviacao(), cotacao.valor()});
 		}
 		tbCotacao.setModel(modelo);
-		
 	}
 }
