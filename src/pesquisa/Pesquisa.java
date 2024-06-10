@@ -15,7 +15,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 public class Pesquisa {
 
 	/** Método que busca a cotação de todas as moedas suportadas, com base no dólar americano */
-	public String buscarCotacao() {
+	public String buscarCotacoes() {
 		HttpRequest request = HttpRequest.newBuilder()
 		        .uri(URI.create("https://v6.exchangerate-api.com/v6/d89ee5ac23bc3ab861b97c2b/latest/USD"))
 		        .build();
