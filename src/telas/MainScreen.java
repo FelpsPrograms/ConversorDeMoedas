@@ -157,14 +157,53 @@ public class MainScreen extends JFrame {
 		btnVoltar.setBounds(10, 382, 100, 21);
 		contentPane.add(btnVoltar);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\voltar_icone.png"));
-		lblNewLabel.setBounds(120, 382, 21, 21);
-		contentPane.add(lblNewLabel);
+		JLabel lblIconeVoltar = new JLabel("");
+		lblIconeVoltar.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\voltar_icone.png"));
+		lblIconeVoltar.setBounds(120, 382, 21, 21);
+		contentPane.add(lblIconeVoltar);
 		
+		/** Deixando os comboBox em branco quando inicializado */
+		listaMoedaBase.setSelectedIndex(-1);
+		listaMoedaAlvo.setSelectedIndex(-1);
+		
+		JLabel lblImagem1 = new JLabel("");
+		lblImagem1.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone1.png"));
+		lblImagem1.setBounds(10, 180, 71, 71);
+		contentPane.add(lblImagem1);
+		
+		JLabel lblImagem2 = new JLabel("");
+		lblImagem2.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone2.png"));
+		lblImagem2.setBounds(30, 25, 100, 100);
+		contentPane.add(lblImagem2);
+		
+		JLabel lblImagem3 = new JLabel("");
+		lblImagem3.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone3.png"));
+		lblImagem3.setBounds(345, 315, 90, 90);
+		contentPane.add(lblImagem3);
+		
+		JLabel lblImagem4 = new JLabel("");
+		lblImagem4.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone4.png"));
+		lblImagem4.setBounds(310, 180, 70, 70);
+		contentPane.add(lblImagem4);
+		
+		JLabel lblImagem5 = new JLabel("");
+		lblImagem5.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone5.png"));
+		lblImagem5.setBounds(365, 90, 60, 60);
+		contentPane.add(lblImagem5);
+		
+		JLabel lblImagem6 = new JLabel("");
+		lblImagem6.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\icone6.png"));
+		lblImagem6.setBounds(275, 1, 55, 55);
+		contentPane.add(lblImagem6);
+		
+		JLabel lblImagemFundo = new JLabel("");
+		lblImagemFundo.setIcon(new ImageIcon("C:\\Users\\ESTG009\\Desktop\\one_projetos\\ConversorDeMoedas\\assets\\imagem_fundo.jpg"));
+		lblImagemFundo.setBounds(0, 0, 436, 412);
+		contentPane.add(lblImagemFundo);
 		atualizarTabelaCotacao();
 	}
 	
+	/** Método responsável por buscar o buscarCotacoes() na inialização da tela */
 	public void atualizarTabelaCotacao() {
 		ArrayList<Cotacao> cotacoes = pesquisa.buscarCotacoes();
 		DefaultTableModel modelo = (DefaultTableModel) tbCotacao.getModel();
